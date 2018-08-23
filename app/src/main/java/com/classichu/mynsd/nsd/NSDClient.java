@@ -5,9 +5,7 @@ import android.net.nsd.NsdManager;
 import android.net.nsd.NsdServiceInfo;
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,7 +16,6 @@ public class NSDClient {
     public static final String SERVICE_TYPE = "_http._tcp.";
     private Context mContext;
     private NsdManager mNsdManager;
-    private NsdManager.ResolveListener mResolveListener;
     private NsdManager.DiscoveryListener mDiscoveryListener;
 
     private Map<String,NsdServiceInfo> mNsdServiceInfoMap = new HashMap<>();
@@ -31,8 +28,6 @@ public class NSDClient {
         mNsdManager = (NsdManager) mContext.getSystemService(Context.NSD_SERVICE);
         //初始化监听：发现服务
         initDiscoveryListener();
-        //初始化监听：连接服务
-        initResolveListener();
     }
 
     private void initDiscoveryListener() {
@@ -129,8 +124,13 @@ public class NSDClient {
         };
     }
 
-    private void initResolveListener() {
-        mResolveListener = new NsdManager.ResolveListener() {
+    public void discoverServices() {
+        mNsdManager.discoverServices(
+                SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, mDiscoveryListener);
+    }
+
+    private void resolveService(NsdServiceInfo nsdServiceInfo) {
+        mNsdManager.resolveService(nsdServiceInfo, new NsdManager.ResolveListener() {
 
             @Override
             public void onResolveFailed(NsdServiceInfo serviceInfo, int errorCode) {
@@ -153,17 +153,7 @@ public class NSDClient {
                     mOnNsdServiceInfoStateListener.onStateChange(mNsdServiceInfoMap);
                 }
             }
-        };
-    }
-
-
-    public void discoverServices() {
-        mNsdManager.discoverServices(
-                SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, mDiscoveryListener);
-    }
-
-    private void resolveService(NsdServiceInfo nsdServiceInfo) {
-        mNsdManager.resolveService(nsdServiceInfo, mResolveListener);
+        });
     }
 
     public void stopServiceDiscovery() {

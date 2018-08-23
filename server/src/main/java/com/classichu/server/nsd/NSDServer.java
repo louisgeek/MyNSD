@@ -15,7 +15,6 @@ public class NSDServer {
 
     private Context mContext;
     private NsdManager mNsdManager;
-    private NsdManager.ResolveListener mResolveListener;
     private NsdManager.DiscoveryListener mDiscoveryListener;
     private NsdManager.RegistrationListener mRegistrationListener;
 
@@ -33,8 +32,6 @@ public class NSDServer {
         initRegistrationListener();
         //初始化监听：发现服务
         initDiscoveryListener();
-        //初始化监听：连接服务
-        initResolveListener();
     }
 
     private void initRegistrationListener() {
@@ -169,8 +166,25 @@ public class NSDServer {
         };
     }
 
-    private void initResolveListener() {
-        mResolveListener = new NsdManager.ResolveListener() {
+    public void registerService(int port) {
+        mPort = port;
+        //
+        NsdServiceInfo serviceInfo = new NsdServiceInfo();
+        serviceInfo.setServiceName(mServiceName);
+        serviceInfo.setServiceType(SERVICE_TYPE);
+        serviceInfo.setPort(mPort);
+        //
+        mNsdManager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD, mRegistrationListener);
+
+    }
+
+    private void discoverServices() {
+        mNsdManager.discoverServices(
+                SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, mDiscoveryListener);
+    }
+
+    private void resolveService(NsdServiceInfo nsdServiceInfo) {
+        mNsdManager.resolveService(nsdServiceInfo, new NsdManager.ResolveListener() {
 
             @Override
             public void onResolveFailed(NsdServiceInfo serviceInfo, int errorCode) {
@@ -197,29 +211,7 @@ public class NSDServer {
 //                mNsdServiceInfo = serviceInfo;
                 stopServiceDiscovery();
             }
-        };
-    }
-
-
-    public void registerService(int port) {
-        mPort = port;
-        //
-        NsdServiceInfo serviceInfo = new NsdServiceInfo();
-        serviceInfo.setServiceName(mServiceName);
-        serviceInfo.setServiceType(SERVICE_TYPE);
-        serviceInfo.setPort(mPort);
-        //
-        mNsdManager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD, mRegistrationListener);
-
-    }
-
-    private void discoverServices() {
-        mNsdManager.discoverServices(
-                SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, mDiscoveryListener);
-    }
-
-    private void resolveService(NsdServiceInfo nsdServiceInfo) {
-        mNsdManager.resolveService(nsdServiceInfo, mResolveListener);
+        });
     }
 
 

@@ -18,7 +18,6 @@ import com.classichu.mynsd.nsd.NSDClient;
 import com.classichu.mynsd.nsd.NSDInfo;
 import com.classichu.mynsd.socket.TcpClient;
 import com.classichu.mynsd.tool.ThreadTool;
-import com.classichu.server.nsd.NSDClient;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

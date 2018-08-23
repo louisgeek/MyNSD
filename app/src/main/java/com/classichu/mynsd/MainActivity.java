@@ -75,8 +75,15 @@ public class MainActivity extends AppCompatActivity {
                                             .create().show();
                                 }
                             });
-                        } catch (IOException e) {
+                        } catch (final IOException e) {
                             e.printStackTrace();
+                            ThreadTool.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(mContext, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                         }
                     }
                 }).start();

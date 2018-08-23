@@ -191,25 +191,31 @@ public class NSDServer {
                 // Called when the resolve fails. Use the error code to debug.
                 Log.e(TAG, "Resolve failed: " + errorCode);
                 if (mOnNsdServiceInfoStateListener != null) {
-                    mOnNsdServiceInfoStateListener.onShowLog("服务自我解析失败:" + errorCode + "，serviceInfo:" + serviceInfo);
+                    mOnNsdServiceInfoStateListener.onShowLog("服务解析失败:" + errorCode + "，serviceInfo:" + serviceInfo);
                 }
             }
 
             @Override
             public void onServiceResolved(NsdServiceInfo serviceInfo) {
                 Log.e(TAG, "Resolve Succeeded. " + serviceInfo);
-                if (mOnNsdServiceInfoStateListener != null) {
-                    mOnNsdServiceInfoStateListener.onShowLog("服务自我解析成功，serviceInfo:" + serviceInfo);
-                }
                 if (mServiceName.equals(serviceInfo.getServiceName())
                         && mPort == serviceInfo.getPort()) {
                     Log.d(TAG, "Same IP.");
                     if (mOnNsdServiceInfoStateListener != null) {
+                        mOnNsdServiceInfoStateListener.onShowLog("服务自我解析成功，serviceInfo:" + serviceInfo);
+                    }
+                    if (mOnNsdServiceInfoStateListener != null) {
                         mOnNsdServiceInfoStateListener.onServiceResolved(serviceInfo);
+                    }
+                    //
+                    stopServiceDiscovery();
+                }else{
+                    if (mOnNsdServiceInfoStateListener != null) {
+                        mOnNsdServiceInfoStateListener.onShowLog("服务解析成功，serviceInfo:" + serviceInfo);
                     }
                 }
 //                mNsdServiceInfo = serviceInfo;
-                stopServiceDiscovery();
+
             }
         });
     }

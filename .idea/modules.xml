@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyNSD.iml" filepath="$PROJECT_DIR$/MyNSD.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mynsdserver/mynsdserver.iml" filepath="$PROJECT_DIR$/mynsdserver/mynsdserver.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package com.classichu.server;
+package com.classichu.mynsdserver;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.classichu.server", appContext.getPackageName());
+        assertEquals("com.classichu.mynsdserver", appContext.getPackageName());
     }
 }

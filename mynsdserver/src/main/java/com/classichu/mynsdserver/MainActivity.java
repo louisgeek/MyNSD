@@ -1,4 +1,4 @@
-package com.classichu.server;
+package com.classichu.mynsdserver;
 
 import android.content.Context;
 import android.net.nsd.NsdServiceInfo;
@@ -8,15 +8,11 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.classichu.server.nsd.NSDServer;
-import com.classichu.server.socket.TcpServer;
+import com.classichu.mynsdserver.nsd.NSDServer;
+import com.classichu.mynsdserver.socket.TcpServer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";

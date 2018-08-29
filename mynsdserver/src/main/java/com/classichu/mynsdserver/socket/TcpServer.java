@@ -1,9 +1,9 @@
-package com.classichu.server.socket;
+package com.classichu.mynsdserver.socket;
 
 import android.content.Context;
 import android.widget.Toast;
 
-import com.classichu.server.tool.ThreadTool;
+import com.classichu.mynsdserver.tool.ThreadTool;
 
 import java.io.BufferedReader;
 import java.io.IOException;

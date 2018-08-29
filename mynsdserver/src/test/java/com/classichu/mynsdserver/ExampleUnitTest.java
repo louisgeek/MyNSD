@@ -1,4 +1,4 @@
-package com.classichu.server;
+package com.classichu.mynsdserver;
 
 import org.junit.Test;
 

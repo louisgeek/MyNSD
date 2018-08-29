@@ -1,4 +1,4 @@
-package com.classichu.server.nsd;
+package com.classichu.mynsdserver.nsd;
 
 import android.content.Context;
 import android.net.nsd.NsdManager;

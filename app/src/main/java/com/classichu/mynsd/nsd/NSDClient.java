@@ -18,7 +18,7 @@ public class NSDClient {
     private NsdManager mNsdManager;
     private NsdManager.DiscoveryListener mDiscoveryListener;
 
-    private Map<String,NsdServiceInfo> mNsdServiceInfoMap = new HashMap<>();
+    private Map<String, NsdServiceInfo> mNsdServiceInfoMap = new HashMap<>();
 
     public NSDClient(Context context) {
         mContext = context;
@@ -148,7 +148,7 @@ public class NSDClient {
                 if (mOnNsdServiceInfoStateListener != null) {
                     mOnNsdServiceInfoStateListener.onShowLog("服务解析成功，serviceInfo:" + serviceInfo);
                 }
-                mNsdServiceInfoMap.put(serviceInfo.getServiceName(),serviceInfo);
+                mNsdServiceInfoMap.put(serviceInfo.getServiceName(), serviceInfo);
                 if (mOnNsdServiceInfoStateListener != null) {
                     mOnNsdServiceInfoStateListener.onStateChange(mNsdServiceInfoMap);
                 }
@@ -159,6 +159,7 @@ public class NSDClient {
     public void stopServiceDiscovery() {
         mNsdManager.stopServiceDiscovery(mDiscoveryListener);
     }
+
     ///
     private OnNsdServiceInfoStateListener mOnNsdServiceInfoStateListener;
 
@@ -167,7 +168,7 @@ public class NSDClient {
     }
 
     public interface OnNsdServiceInfoStateListener {
-        void onStateChange(Map<String,NsdServiceInfo> nsdServiceInfoMap);
+        void onStateChange(Map<String, NsdServiceInfo> nsdServiceInfoMap);
 
         void onShowLog(String log);
     }

@@ -1,4 +1,4 @@
-package com.classichu.server.tool;
+package com.classichu.mynsdserver.tool;
 
 import android.os.Handler;
 import android.os.Looper;

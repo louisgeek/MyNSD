@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.classichu.server"
+        applicationId "com.classichu.mynsdserver"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1

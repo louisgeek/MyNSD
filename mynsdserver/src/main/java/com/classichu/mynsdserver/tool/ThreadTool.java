@@ -16,23 +16,4 @@ public class ThreadTool {
             mHandler.post(runnable);
         }
     }
-
-    public static final void runOnUiThread2(Runnable runnable) {
-        Handler mHandler = new Handler(Looper.getMainLooper());
-        //使用Looper类判断
-        if (Looper.myLooper() == Looper.getMainLooper()) {
-            runnable.run();
-        } else {
-            mHandler.post(runnable);
-        }
-    }
-
-    public static boolean isMainThread() {
-        //使用Looper类判断
-        if (Looper.myLooper() == Looper.getMainLooper()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
